@@ -1,9 +1,8 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { Transaction } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-
 export async function classifyTransactions(data: string, pdfData?: string): Promise<Transaction[]> {
+  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' });
   const prompt = `
     Analyze the following transaction data. It could be raw text or a provided PDF bank statement.
     Classify each transaction as either 'Business' or 'Personal'.
